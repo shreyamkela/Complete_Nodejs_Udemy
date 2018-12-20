@@ -5,3 +5,5 @@ console.log(_.isString('shreyam'));
 
 var filteredArray = _.uniq(['Shreyam', 1,'Shreyam',2,3,3,4]); // removes duplicates in an array
 console.log(filteredArray);
+
+// use nodemon from npm, to run new changes on terminal automatically. nodemon is used for development purposes
