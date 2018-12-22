@@ -1,5 +1,5 @@
 const yargs = require('yargs');
-// yargs is very useful for parsing command line input
+// yargs is very useful for parsing command line input (and what other kinds of inputs?)
 
 const notes = require('./notes.js');
 
