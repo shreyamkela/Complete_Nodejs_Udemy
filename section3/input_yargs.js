@@ -8,7 +8,7 @@ var command = process.argv[2];
 const argv = yargs.argv;
 
 console.log('Process: ', process.argv)
-console.log('Command: ', command);
+console.log('Command: ', command); 
 console.log('Yargs:', argv);
 
 // node ./input_yargs.js add --title=secret --body="This is my secret"
@@ -16,13 +16,13 @@ if(command == 'add') {
     notes.addNote(argv.title, argv.body);
 }
 else if (command == 'read') {
-    console.log("Reading");
+    notes.readNote(argv.title);
 }
 else if (command == 'list') {
-    console.log("Listing");
+    notes.getAll();
 }
 else if (command == 'remove') {
-    console.log("Removing");
+    notes.removeNote(argv.title);
 }
 else {
     console.log("Command not recognised");

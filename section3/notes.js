@@ -17,10 +17,28 @@ console.log('Starting notes.js');
 
 // Code for input_yargs.js
 var addNote = (title, body) => {
-    console.log("Adding note", title, body);
+    console.log("Adding note ", title, body);
+
+};
+
+var readNote = (title) => {
+    console.log("Reading note ", title);
+
+};
+
+var getAll = () => {
+    console.log("Getting all notes");
+
+};
+
+var removeNote = (title) => {
+    console.log("Removing note ", title);
 
 };
 
 module.exports = { // exporting addNote as an object
-    addNote // In es6 this is same as addNote : addNote; i.e attribute : value 
+    addNote, // In es6 this is same as addNote : addNote; i.e attribute : value 
+    readNote,
+    getAll,
+    removeNote
 }
