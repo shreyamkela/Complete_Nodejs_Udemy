@@ -39,6 +39,6 @@ var removeNote = (title) => {
 module.exports = { // exporting addNote as an object
     addNote, // In es6 this is same as addNote : addNote; i.e attribute : value 
     readNote,
-    getAll,
+    getAll, 
     removeNote
 }
