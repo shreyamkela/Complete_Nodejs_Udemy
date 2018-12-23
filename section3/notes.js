@@ -34,12 +34,26 @@ var addNote = (title, body) => {
     try {
         var notesString = fs.readFileSync('notes-data.json'); // load all previous notes into notes array, so that when new not is added, previous notes are not over-written
         notes = JSON.parse(notesString); //Change string to json object
+        
     } catch(e) {
         console.log('New notes-data file created!');
     }
     
-    notes.push(note); // Push current note object into notes array
-    fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+    // We need to check whether the title of the new note already exists or not. If it does exist then we should not be saving this new note otherwise there would be duplicate notes
+    // We cannot use searching whether a key exists or not (as in HashMaps) here. The key of the title is the word title itself. But what we are concerned with is the value. There should not be duplicate title values.
+    // If title does not exist, then we push the note:
+    // var duplicateNotes = notes.filter((note) => {
+    //     return note.title === title;
+    // });
+    // Above code is written in es6 shorthand as:
+    var duplicateNotes = notes.filter((note) => note.title === title);
+    if(duplicateNotes.length === 0) {
+        notes.push(note); // Push current note object into notes array
+        fs.writeFileSync('notes-data.json', JSON.stringify(notes)); // Write object as string
+    } else {
+        console.log('Note with this title already present');
+    }
+
 };
 
 var readNote = (title) => {
