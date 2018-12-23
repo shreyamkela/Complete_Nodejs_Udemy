@@ -14,9 +14,26 @@ console.log('Starting notes.js');
 //     return a+b;
 // };
 
-const fs = require('fs');
 
 // Code for input_yargs.js
+const fs = require('fs');
+
+
+var fetchNotes = () => {
+    try {
+        var notesString = fs.readFileSync('notes-data.json'); // load all previous notes into notes array, so that when new not is added, previous notes are not over-written
+        return JSON.parse(notesString); //Change string to json object
+        
+    } catch(e) {
+        //console.log('New notes-data file created!');
+        return [];
+    }
+};
+
+var saveNotes = () => {
+
+};
+
 var addNote = (title, body) => {
     //console.log("Adding note ", title, body);
 
@@ -31,13 +48,9 @@ var addNote = (title, body) => {
     // If it is present then we push into it the new note
     // Try catch is used as if the file is not present, code inside try will try to read file but will throw error. And as try catch is there, it will be caught without crashing the program
     // If try catch is not used, the program will crash
-    try {
-        var notesString = fs.readFileSync('notes-data.json'); // load all previous notes into notes array, so that when new not is added, previous notes are not over-written
-        notes = JSON.parse(notesString); //Change string to json object
-        
-    } catch(e) {
-        console.log('New notes-data file created!');
-    }
+    // That's why we use the try and catch function fetchNotes above
+
+
     
     // We need to check whether the title of the new note already exists or not. If it does exist then we should not be saving this new note otherwise there would be duplicate notes
     // We cannot use searching whether a key exists or not (as in HashMaps) here. The key of the title is the word title itself. But what we are concerned with is the value. There should not be duplicate title values.
