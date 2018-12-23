@@ -9,11 +9,18 @@ const argv = yargs.argv;
 
 console.log('Process: ', process.argv)
 console.log('Command: ', command); 
-console.log('Yargs:', argv);
+console.log('Yargs:', argv); 
 
 // node ./input_yargs.js add --title=secret --body="This is my secret"
 if(command == 'add') {
-    notes.addNote(argv.title, argv.body);
+    var note = notes.addNote(argv.title, argv.body);
+    console.log(note);
+    if(note!==undefined) {
+        console.log('Note added');
+    }
+    else {
+        console.log('Note with this title already present.');
+    }
 }
 else if (command == 'read') {
     notes.readNote(argv.title);

@@ -19,7 +19,7 @@ console.log('Starting notes.js');
 const fs = require('fs');
 
 
-var fetchNotes = () => {
+var fetchNotes = () => { // try catch block made into a function so that different methods can fetch the notes, whenever required
     try {
         var notesString = fs.readFileSync('notes-data.json'); // load all previous notes into notes array, so that when new not is added, previous notes are not over-written
         return JSON.parse(notesString); //Change string to json object
@@ -30,18 +30,12 @@ var fetchNotes = () => {
     }
 };
 
-var saveNotes = () => {
-
+var saveNotes = (notes) => {
+    fs.writeFileSync('notes-data.json', JSON.stringify(notes)); // Write object as string
 };
 
 var addNote = (title, body) => {
     //console.log("Adding note ", title, body);
-
-    var notes = []; // Stores all notes in an array
-    var note = { // A note object
-         title,
-         body
-    };
 
     // notes-data.json saves all the notes
     // If there is no notes-data.json already present, then we create a new file
@@ -50,7 +44,11 @@ var addNote = (title, body) => {
     // If try catch is not used, the program will crash
     // That's why we use the try and catch function fetchNotes above
 
-
+    var notes = fetchNotes(); // Stores all notes in an array
+    var note = { // A note object
+         title,
+         body
+    };
     
     // We need to check whether the title of the new note already exists or not. If it does exist then we should not be saving this new note otherwise there would be duplicate notes
     // We cannot use searching whether a key exists or not (as in HashMaps) here. The key of the title is the word title itself. But what we are concerned with is the value. There should not be duplicate title values.
@@ -62,10 +60,12 @@ var addNote = (title, body) => {
     var duplicateNotes = notes.filter((note) => note.title === title);
     if(duplicateNotes.length === 0) {
         notes.push(note); // Push current note object into notes array
-        fs.writeFileSync('notes-data.json', JSON.stringify(notes)); // Write object as string
+        saveNotes(notes);
+        return note;
     } else {
-        console.log('Note with this title already present');
+        return undefined; // This is returned to input_yargs. If undefined that means note has already been added
     }
+
 
 };
 
