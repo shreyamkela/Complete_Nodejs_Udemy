@@ -19,7 +19,7 @@ console.log('Starting notes.js');
 const fs = require('fs');
 
 
-var fetchNotes = () => { // try catch block made into a function so that different methods can fetch the notes, whenever required
+var fetchNotes = () => { // try catch block made into a fetchNotes function so that different methods can fetch the notes, whenever required
     try {
         var notesString = fs.readFileSync('notes-data.json'); // load all previous notes into notes array, so that when new not is added, previous notes are not over-written
         return JSON.parse(notesString); //Change string to json object
@@ -80,8 +80,9 @@ var getAll = () => {
 };
 
 var removeNote = (title) => {
-    console.log("Removing note ", title);
-
+    var notes = fetchNotes();
+    var filteredNotes = notes.filter((note) => note.title != title); // Keep al notes that do not have their title as user inputted 'title', therefore removing this title
+    saveNotes(filteredNotes);
 };
 
 module.exports = { // exporting addNote as an object
