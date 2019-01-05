@@ -16,6 +16,7 @@ if(command == 'add') {
     var note = notes.addNote(argv.title, argv.body); 
     if(note!==undefined) {
         console.log('Note added');
+        notes.logNote(note); // Print the note with a reusable function logNote. This follows the DRY principle which is dont repeat yourself. 
     }
     else {
         console.log('Note with this title already present.');
@@ -23,13 +24,11 @@ if(command == 'add') {
 }
 else if (command == 'read') {
     var noteRead = notes.readNote(argv.title);
-    if(noteRead === undefined) {
-        console.log('This note not found');
-    }
-    else {
+    if(noteRead) {
         console.log('Note found');
-        console.log('Title:', noteRead.title);
-        console.log('Body:', noteRead.body);
+        notes.logNote(noteRead); 
+    } else {
+        console.log('This note not found');
     }
 
 }

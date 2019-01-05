@@ -75,11 +75,8 @@ var readNote = (title) => { // readNote or getNote
         title
    };
     var filteredNotes = notes.filter((note) => note.title === title);
-    if(filteredNotes.length>0) {
-        return filteredNotes[0]; // filteredNotes is an array. Different note objects are at different indexes of filteredNotes. For readNote, there would only be 1 note object in filteredNotes
-    } else {
-        return undefined;
-    }
+    return filteredNotes[0]; // filteredNotes is an array. Different note objects are at different indexes of filteredNotes. For readNote, there would only be 1 note object in filteredNotes
+
 };
 
 var getAll = () => {
@@ -98,9 +95,16 @@ var removeNote = (title) => {
     return notes.length !== filteredNotes.length; // return true if not equal i.e return true if a note is removed
 };
 
+var logNote = (note) => {
+    console.log('---------------');
+    console.log('Title:', note.title);
+    console.log(`Body: ${note.body}`); // Remember to put ` instead of ' when using $ method for printing
+}
+
 module.exports = { // exporting addNote as an object
     addNote, // In es6 this is same as addNote : addNote; i.e attribute : value 
     readNote,
     getAll, 
-    removeNote
+    removeNote,
+    logNote
 }
