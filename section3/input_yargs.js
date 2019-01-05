@@ -13,8 +13,7 @@ console.log('Yargs:', argv);
 
 // node ./input_yargs.js add --title=secret --body="This is my secret"
 if(command == 'add') {
-    var note = notes.addNote(argv.title, argv.body);
-    console.log(note);
+    var note = notes.addNote(argv.title, argv.body); 
     if(note!==undefined) {
         console.log('Note added');
     }
@@ -29,7 +28,9 @@ else if (command == 'list') {
     notes.getAll();
 }
 else if (command == 'remove') {
-    notes.removeNote(argv.title);
+    var noteRemoved = notes.removeNote(argv.title);
+    var message = noteRemoved ? 'Note was removed' : 'Note not found';
+    console.log(message);
 }
 else {
     console.log("Command not recognised");

@@ -81,8 +81,10 @@ var getAll = () => {
 
 var removeNote = (title) => {
     var notes = fetchNotes();
-    var filteredNotes = notes.filter((note) => note.title != title); // Keep al notes that do not have their title as user inputted 'title', therefore removing this title
+    var filteredNotes = notes.filter((note) => note.title !== title); // Keep al notes that do not have their title as user inputted 'title', therefore removing this title
     saveNotes(filteredNotes);
+
+    return notes.length !== filteredNotes.length; // return true if not equal i.e return true if a note is removed
 };
 
 module.exports = { // exporting addNote as an object
