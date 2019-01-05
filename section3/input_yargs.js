@@ -22,7 +22,16 @@ if(command == 'add') {
     }
 }
 else if (command == 'read') {
-    notes.readNote(argv.title);
+    var noteRead = notes.readNote(argv.title);
+    if(noteRead === undefined) {
+        console.log('This note not found');
+    }
+    else {
+        console.log('Note found');
+        console.log('Title:', noteRead.title);
+        console.log('Body:', noteRead.body);
+    }
+
 }
 else if (command == 'list') {
     notes.getAll();

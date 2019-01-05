@@ -69,9 +69,17 @@ var addNote = (title, body) => {
 
 };
 
-var readNote = (title) => {
-    console.log("Reading note ", title);
-
+var readNote = (title) => { // readNote or getNote
+    var notes = fetchNotes();
+    var note = { // A note object for readNote. It only has title parameter as we only filter on the 'title'
+        title
+   };
+    var filteredNotes = notes.filter((note) => note.title === title);
+    if(filteredNotes.length>0) {
+        return filteredNotes[0]; // filteredNotes is an array. Different note objects are at different indexes of filteredNotes. For readNote, there would only be 1 note object in filteredNotes
+    } else {
+        return undefined;
+    }
 };
 
 var getAll = () => {
@@ -81,6 +89,9 @@ var getAll = () => {
 
 var removeNote = (title) => {
     var notes = fetchNotes();
+    var note = { // // A note object for removeNote. It only has title parameter as we only filter on the 'title'
+        title
+   };
     var filteredNotes = notes.filter((note) => note.title !== title); // Keep al notes that do not have their title as user inputted 'title', therefore removing this title
     saveNotes(filteredNotes);
 
