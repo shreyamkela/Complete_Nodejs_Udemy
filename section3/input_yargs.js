@@ -1,5 +1,5 @@
 const yargs = require('yargs');
-// yargs is very useful for parsing command line input (and what other kinds of inputs?)
+// yargs is very useful for parsing command line input (and what other kinds of inputs?) and providing a command line UI to the user
 
 const notes = require('./notes.js');
 
@@ -7,9 +7,9 @@ var command = process.argv[2];
 
 const argv = yargs.argv;
 
-console.log('Process: ', process.argv)
-console.log('Command: ', command); 
-console.log('Yargs:', argv); 
+// console.log('Process: ', process.argv)
+// console.log('Command: ', command); 
+// console.log('Yargs:', argv); 
 
 // node ./input_yargs.js add --title=secret --body="This is my secret"
 if(command == 'add') {
