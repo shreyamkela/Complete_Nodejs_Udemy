@@ -5,7 +5,22 @@ const notes = require('./notes.js');
 
 var command = process.argv[2];
 
-const argv = yargs.argv;
+// const argv = yargs.argv; // simple yargs.argv use to give argument passing functionality through flags, with yargs. If we want a better command line UI, we can chain more yargv functions to argv for more a interactive command line UI
+const argv = yargs
+    .command('add', 'Add a note', {
+        title: {
+            describe: 'Title of note', // describe tells to the user what do we mean by 'title' 
+            demand: true, // demand true tells user that a title has to present, if title not provided, program gives warning
+            alias: 't' // instead of typing full flag '--title', user can just type '-t'
+        },
+        body: {
+            describe: 'Body of note', 
+            demand: false, 
+            alias: 'b'
+        }
+    })
+    .help() // shows all the flags inside command that the user can set 
+    .argv; // takes in argument
 
 // console.log('Process: ', process.argv)
 // console.log('Command: ', command); 
