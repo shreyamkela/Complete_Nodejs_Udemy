@@ -7,7 +7,7 @@ var command = process.argv[2];
 
 // const argv = yargs.argv; // simple yargs.argv use to give argument passing functionality through flags, with yargs. If we want a better command line UI, we can chain more yargv functions to argv for more a interactive command line UI
 
-titleOptions = {
+titleOptions = { // flags or options for 'title' flag are used in all 3 our main functions add, read, remove therefore it makes sense to wrap it up in a varibale and use that variable everywhere in const argv = yargs.command(...). So we create titleOptions object once and then reference it as required
     describe: 'Title of note', // describe tells to the user what do we mean by 'title' 
     demand: true, // demand true tells user that a title has to present, if title not provided, program gives warning
     alias: 't' // instead of typing full flag '--title', user can just type '-t'
