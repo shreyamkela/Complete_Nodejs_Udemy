@@ -4,7 +4,7 @@ var person = {
 
 person.age = 24;
 
-debugger; // breaks to here, when used c in debugger
+debugger; // this is a breakpoint - breaks to here, when c is used in debugger
 
 person.name = 'Kela';
 

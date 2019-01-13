@@ -33,7 +33,10 @@ else if (command == 'read') {
 
 }
 else if (command == 'list') {
-    notes.getAll();
+    var allNotes = notes.getAll();
+    console.log(`Printing ${allNotes.length} note(s)`);
+    //console.log(allNotes); // prints the allNotes in unformatted way -> Prints the whole array. To print in formatted way we use forEach inbuilt function with our logNote function
+    allNotes.forEach((note) => notes.logNote(note)); // Arrow function with for each -> for each note obj in allNote, print the note with formatting
 }
 else if (command == 'remove') {
     var noteRemoved = notes.removeNote(argv.title);

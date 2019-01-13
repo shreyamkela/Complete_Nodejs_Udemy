@@ -80,8 +80,7 @@ var readNote = (title) => { // readNote or getNote
 };
 
 var getAll = () => {
-    console.log("Getting all notes");
-
+    return fetchNotes(); // return all notes
 };
 
 var removeNote = (title) => {
@@ -96,6 +95,7 @@ var removeNote = (title) => {
 };
 
 var logNote = (note) => {
+    debugger; // for Lec 20 debugging
     console.log('---------------');
     console.log('Title:', note.title);
     console.log(`Body: ${note.body}`); // Remember to put ` instead of ' when using $ method for printing
