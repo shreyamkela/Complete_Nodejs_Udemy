@@ -23,6 +23,7 @@ var user = {
     sayHiAlt () { // This is a regular espresstion and not an arrow function expression
         console.log(`Hi. I'm ${this.name}`);
         console.log(arguments); // 'arguments' is an array like structure implicitly provided in regular exp call for es6
+        // Therefore to use 'this' binding and local implicit 'arguments' array like structure, use es6 regular exp rather than es6 arrow func exp
     }
 
 };
