@@ -25,4 +25,4 @@ fs.appendFile('greeting.txt', 'Hello' + user.username + `Hey ${user.username}!` 
         console.log('Success')
     }
 });
-// `Hey ${user.username}!` is using Template Literal of es6. For this to work use backticks "`" instead of single quotes "'", when printing
+// `Hey ${user.username}!` is using Template Literal/string of es6. For this to work use backticks "`" instead of single quotes "'", when printing
