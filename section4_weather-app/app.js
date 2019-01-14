@@ -1,7 +1,7 @@
 const request = require('request');
 const fs = require('fs');
 
-var secretKey = fs.readFileSync('secret-key.txt', 'utf-8'); // save the key from mapquestapi (i.e the map api) into the variable so that it is not visible to others. secret-key.txt would only be present on your machine and will not be uploaded on git as we will include secret-key.txt in gitignore. Not showing keys publicly is an essential practice for keys
+var secretKey = fs.readFileSync('secret-key.txt', 'utf-8'); // save the key from mapquestapi (i.e the map api) into a local file and read from into a variable, so that the key is not shared with others. secret-key.txt would only be present on your machine and will not be uploaded on git as we include secret-key.txt in gitignore. Not showing keys publicly is an essential practice for keys
 //console.log(secretKey);
 
 request({ // this first argument of request is the options object
