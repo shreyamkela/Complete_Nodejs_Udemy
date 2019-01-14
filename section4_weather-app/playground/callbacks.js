@@ -27,3 +27,5 @@ var getUser = (id, callback) => { // Defining a callback funtion. 'callback' as 
 getUser(45, (userObject) => { // In getUser callback function, userObject is passed as argument to 'callback', thus callback(user) will store 'user' into userObject
     console.log(userObject);
 });
+
+console.log('I am printing before the callback returns');
