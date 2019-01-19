@@ -1,5 +1,6 @@
 const yargs = require('yargs');
-const geocode = require('./geocode/geocode.js'); //geocode.js can be called as simply geocode 
+const geocode = require('./geocode/geocode'); //geocode.js can be called as simply geocode 
+const forecast = require('./forecast/forecast');
 
 const argv = yargs
     .options({ // Inside of options is options object specifying the different options. Each option has several properties that can be set
@@ -18,10 +19,25 @@ const argv = yargs
 
 //geocode.geocodeAddress(argv.a); // A simple call to the abstracted away geocodeAddress function
 // Slightly modified version to get the results and error message (if any) as well. And print it here and not in the geocode function
+location = {};
 geocode.geocodeAddress(argv.a, (errorMessage, results) => {
+    if(errorMessage) {
+        console.log(errorMessage);
+    } else {
+        console.log(JSON.stringify(results, undefined, 2));
+        location = results;
+    }
+});
+
+console.log(location);
+
+forecast.weatherForecast(location, (errorMessage, results) => {
     if(errorMessage) {
         console.log(errorMessage);
     } else {
         console.log(JSON.stringify(results, undefined, 2));
     }
 });
+
+
+
