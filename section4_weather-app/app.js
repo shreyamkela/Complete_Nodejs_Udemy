@@ -1,4 +1,3 @@
-const request = require('request');
 const yargs = require('yargs');
 const geocode = require('./geocode/geocode.js'); //geocode.js can be called as simply geocode 
 
@@ -17,4 +16,12 @@ const argv = yargs
 
 //console.log(argv);
 
-geocode.geocodeAddress(argv.a);
+//geocode.geocodeAddress(argv.a); // A simple call to the abstracted away geocodeAddress function
+// Slightly modified version to get the results and error message (if any) as well. And print it here and not in the geocode function
+geocode.geocodeAddress(argv.a, (errorMessage, results) => {
+    if(errorMessage) {
+        console.log(errorMessage);
+    } else {
+        console.log(JSON.stringify(results, undefined, 2));
+    }
+});
