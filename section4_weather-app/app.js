@@ -23,14 +23,17 @@ location = {};
 geocode.geocodeAddress(argv.a, (errorMessage, results) => {
     if(errorMessage) {
         console.log(errorMessage);
+        location = results;
     } else {
         console.log(JSON.stringify(results, undefined, 2));
         location = results;
     }
 });
-
+debugger;
 console.log(location);
 
+// if we keep the mapquest api fetching code geocode.js and dasrk sky api code forecast.js as seperate, then maybe these 2 behave in async manner therefore, forecast function might get called in app.js before location has been fetched by geocode.js. Therefore we need to make latitude/longitude fetching and forecast fetching in a sequence i.e sync call
+// Thats why calling forecast seperately wont work
 forecast.weatherForecast(location, (errorMessage, results) => {
     if(errorMessage) {
         console.log(errorMessage);
