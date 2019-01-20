@@ -1,7 +1,7 @@
 const request = require('request');
 const fs = require('fs');
 
-var weatherForecast = (newLocation, callback) => {
+var getWeather = (newLocation, callback) => {
     var location = `${newLocation.latitude},${newLocation.longitude}`;
     var secretKey = fs.readFileSync('./forecast/secret-key.txt', 'utf-8'); 
     request({ // this first argument of request is the options object
@@ -12,12 +12,13 @@ var weatherForecast = (newLocation, callback) => {
         if(error || body.error === 400) {
             callback('Unable to fetch weather.'); // Dont need to pass anything as the second argument. This line would be interpretted as first argument i.e errorMessage
         } else { // If location is valid and no error then the output json from darksky api does not have 'error' key
+                debugger;
                 callback(undefined, {
-                currently: body.currently.temperature
+                temperature: body.currently.temperature
             });
         }
         
     });
 };
 
-module.exports.weatherForecast = weatherForecast; // As there is only one function to be exported, we create the export object in this fashion
+module.exports.getWeather = getWeather; // As there is only one function to be exported, we create the export object in this fashion

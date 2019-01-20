@@ -1,6 +1,6 @@
 const yargs = require('yargs');
 const geocode = require('./geocode/geocode'); //geocode.js can be called as simply geocode 
-const forecast = require('./forecast/forecast');
+const forecast = require('./forecast/forecast.js');
 
 const argv = yargs
     .options({ // Inside of options is options object specifying the different options. Each option has several properties that can be set
@@ -29,18 +29,20 @@ geocode.geocodeAddress(argv.a, (errorMessage, results) => {
         location = results;
     }
 });
-debugger;
+
 console.log(location);
 
-// if we keep the mapquest api fetching code geocode.js and dasrk sky api code forecast.js as seperate, then maybe these 2 behave in async manner therefore, forecast function might get called in app.js before location has been fetched by geocode.js. Therefore we need to make latitude/longitude fetching and forecast fetching in a sequence i.e sync call
+// if we keep the mapquest api fetching call and dark sky api forecast fetching call as seperate and without timeout, then maybe these 2 behave in async manner therefore, forecast function might get called in app.js before location has been fetched by geocode.js. Therefore we need to make latitude/longitude fetching and forecast fetching in a sequence i.e sync call
 // Thats why calling forecast seperately wont work
-forecast.weatherForecast(location, (errorMessage, results) => {
-    if(errorMessage) {
-        console.log(errorMessage);
-    } else {
-        console.log(JSON.stringify(results, undefined, 2));
-    }
-});
 
+setTimeout(() => {
+    forecast.getWeather(location, (errorMessage, results) => { // We only need to pass an object with lattitude and longitude, into the 1st argument. location has only 1 more argument of address therefore we can go on to pass location itself
+        if(errorMessage) {
+            console.log(errorMessage);
+        } else {
+            console.log(JSON.stringify(results, undefined, 2));
+        }
+    })
+}, 1000);
 
 

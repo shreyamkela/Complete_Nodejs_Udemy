@@ -7,7 +7,7 @@ const fs = require('fs');
 var geocodeAddress = (address, callback) => {
 
     var encodedAddress = encodeURIComponent(address);
-    console.log(encodedAddress);
+    // console.log(encodedAddress);
     
     var secretKey = fs.readFileSync('./geocode/secret-key.txt', 'utf-8'); // save the key from mapquestapi (i.e the map api) into a local file and read from into a variable, so that the key is not shared with others. secret-key.txt would only be present on your machine and will not be uploaded on git as we include secret-key.txt in gitignore. Not showing keys publicly is an essential practice for keys
     
