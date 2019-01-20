@@ -19,19 +19,33 @@ const argv = yargs
 
 //geocode.geocodeAddress(argv.a); // A simple call to the abstracted away geocodeAddress function
 // Slightly modified version to get the results and error message (if any) as well. And print it here and not in the geocode function
-
+location = {};
 geocode.geocodeAddress(argv.a, (errorMessage, results) => {
     if(errorMessage) {
         console.log(errorMessage);
+        location = results;
     } else {
         console.log(JSON.stringify(results, undefined, 2));
-        // Adding getWeather call inside callback of geocode makes the geocodeAddress call and getWeather call sync calls i.e in a sequence
-        forecast.getWeather(results.latitude, results.longitude, (errorMessage, weatherResults) => { // We only need to pass an object with lattitude and longitude, into the 1st argument. location has only 1 more argument of address therefore we can go on to pass location itself
-            if(errorMessage) {
-                console.log(errorMessage);
-            } else {
-                console.log(JSON.stringify(weatherResults, undefined, 2)); // undefined argument is a filtering function
-            }
-        });
+        location = results;
     }
 });
+
+console.log(location);
+
+// if we keep the mapquest api fetching call and dark sky api forecast fetching call as seperate and without timeout, then maybe these 2 behave in async manner therefore, forecast function might get called in app.js before location has been fetched by geocode.js. Therefore we need to make latitude/longitude fetching and forecast fetching in a sequence i.e sync call
+// Thats why calling forecast seperately wont work. If we want it to work seperately we can add getWeather/forecast call inside timeout to set a timeout like below:
+
+setTimeout(() => {
+    forecast.getWeather(latitude = 37, longitude = -122, (errorMessage, weatherResults) => { // We only need to pass an object with lattitude and longitude, into the 1st argument. location has only 1 more argument of address therefore we can go on to pass location itself
+        if(errorMessage) {
+            console.log(errorMessage);
+        } else {
+            console.log(JSON.stringify(weatherResults, undefined, 2)); // undefined argument is a filtering function
+        }
+    })
+}, 1000);
+
+// A BETTER WAY TO DO THIS IS PUTTING THE forecast.getWeather CALL INSIDE THE CALLBACK FUNCTION OF geocode.geocodeAddress SO THAT forecast IS ONLY CALLED AFTER geocode CALL GETS BACK
+
+
+
