@@ -24,13 +24,15 @@ geocode.geocodeAddress(argv.a, (errorMessage, results) => {
     if(errorMessage) {
         console.log(errorMessage);
     } else {
-        console.log(JSON.stringify(results, undefined, 2));
+        //console.log(JSON.stringify(results, undefined, 2));
+        console.log(`Address: ${results.address}`);
         // Adding getWeather call inside callback of geocode makes the geocodeAddress call and getWeather call sync calls i.e in a sequence
         forecast.getWeather(results.latitude, results.longitude, (errorMessage, weatherResults) => { // We only need to pass an object with lattitude and longitude, into the 1st argument. location has only 1 more argument of address therefore we can go on to pass location itself
             if(errorMessage) {
                 console.log(errorMessage);
             } else {
-                console.log(JSON.stringify(weatherResults, undefined, 2)); // undefined argument is a filtering function
+                //console.log(JSON.stringify(weatherResults, undefined, 2)); // undefined argument is a filtering function
+                console.log(`It's currently ${weatherResults.temperature} Fahrenheit. It feels like ${weatherResults.apparentTemperature} Fahrenheit`);
             }
         });
     }

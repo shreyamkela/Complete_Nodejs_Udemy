@@ -46,6 +46,7 @@ setTimeout(() => {
 }, 1000);
 
 // A BETTER WAY TO DO THIS IS PUTTING THE forecast.getWeather CALL INSIDE THE CALLBACK FUNCTION OF geocode.geocodeAddress SO THAT forecast IS ONLY CALLED AFTER geocode CALL GETS BACK
-
+// EVEN BETTER WAY TO DO THIS IS BY USING es6 promises FEATURE TO TURN async TO sync. WE CAN ALSO USE async/await WITH promises INSTEAD OF SIMPLE promises
+// 
 
 
