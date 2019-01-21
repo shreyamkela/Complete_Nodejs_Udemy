@@ -30,13 +30,25 @@ var asyncAdd = (a, b) => {
     });
 };
 
-asyncAdd(5, 7).then((res1) => { //res1 is the returned value for asyncAdd(5, 7) Promise means that asyncAddhas promised that it will either return will answer or an error message. And when it returns, one of the 2 parameters inside then() is activated
+// asyncAdd(5, 'l').then((res1) => { //res1 is the returned value for asyncAdd(5, 7) Promise means that asyncAddhas promised that it will either return will answer or an error message. And when it returns, one of the 2 parameters inside then() is activated
+//     console.log('Result1:', res1);
+//     return asyncAdd(res1, '33'); // We call asyncAdd again which makes a new promise with res1 and 33 as arguments. Therefore if first promise is fulfilled, this new promise is made, thus chaining promises to form sync call. The next then() handles this 2nd promise. Return keyword has to be used to chain this 2nd promise with the next then()
+// }, (errorMessage) => {
+//     console.log(errorMessage);
+// }).then((res2) => {
+//     console.log('Result2:', res2);
+// }, (errorMessage) => {
+//     console.log(errorMessage);
+// });
+
+// In the above asyncAdd(5, 'l')... code, first promise call back fails and rejects to an errorMessage, 2nd promise is still fired as it thinks that error was handled as the 1st then() has 2 parameters of which the second is the error handler. Now as 3nd then thinks there was no error, it runs it's resolve but prints undefined as there was no correct input
+// To check for this, form each then() we remove the error handler and put the error handles after all the then() calls. This is done by a catch() statement
+
+asyncAdd(5, 'l').then((res1) => { //res1 is the returned value for asyncAdd(5, 7) Promise means that asyncAddhas promised that it will either return will answer or an error message. And when it returns, one of the 2 parameters inside then() is activated
     console.log('Result1:', res1);
-    return asyncAdd(res1, 33); // We call asyncAdd again which makes a new promise with res1 and 33 as arguments. Therefore if first promise is fulfilled, this new promise is made, thus chaining promises to form sync call. The next then() handles this 2nd promise
-}, (errorMessage) => {
-    console.log(errorMessage);
+    return asyncAdd(res1, 33); // We call asyncAdd again which makes a new promise with res1 and 33 as arguments. Therefore if first promise is fulfilled, this new promise is made, thus chaining promises to form sync call. The next then() handles this 2nd promise. Return keyword has to be used to chain this 2nd promise with the next then()
 }).then((res2) => {
     console.log('Result2:', res2);
-}, (errorMessage) => {
+}).catch((errorMessage) => {
     console.log(errorMessage);
 });
