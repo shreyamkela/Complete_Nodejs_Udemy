@@ -1,7 +1,10 @@
 http_request.js is app.js for Lec 25-30
 callback_errors.js is app.js for Lec 31-32
 chaining_callback.js is app.js for Lec 33-35 first half
-chaining_callback_2.js is app.js for Lec 35 second half
+chaining_callback_2.js is app.js for Lec 35 second half-37
+ is app.js for Lec 38
 
+geocode_no_promises is geocode.js till lecture 37
+forecast_no_promises is forecast.js till lecture 37
 
 forecast folder is weather folder from the videos
