@@ -55,7 +55,7 @@ axios.get(geocodeUrl).then((response) => { // axios.get() performs get request o
     console.log(`It's currently ${FtoCconvertor(temperature)} Fahrenheit. It feels like ${FtoCconvertor(apparentTemperature)} Fahrenheit`);
 }).catch((error) => {
     // console.log(error); // Error when the api server fails or error when address entered is invalid. All types of errors can be caught into this catch() when 'throw new error' (for axios, which is similar to reject() in promises)  is used inside then().
-    if(error.code === 'ENOTFOUND') {
+    if(error.code === 'ENOTFOUND') { // Catches both map quest and dark sky api server errors
         console.log('Unable to connect to API servers');
     }  else { // If other error like address invalid
         console.log(error.message);
