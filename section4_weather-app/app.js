@@ -1,6 +1,6 @@
 const yargs = require('yargs');
-const geocode = require('./geocode/geocode'); //geocode.js can be called as simply geocode 
-const forecast = require('./forecast/forecast.js');
+const fs = require('fs');
+const axios = require('axios');
 
 const argv = yargs
     .options({ // Inside of options is options object specifying the different options. Each option has several properties that can be set
@@ -15,16 +15,19 @@ const argv = yargs
     .alias('help', 'h') //by alias() we can set the alias for help itself
     .argv; // .argv stores all the options into the var used for this yargs which in this case is 'argv'
 
-//console.log(argv);
 
-//geocode.geocodeAddress(argv.a); // A simple call to the abstracted away geocodeAddress function
-// Slightly modified version to get the results and error message (if any) as well. And print it here and not in the geocode function
+//USING AXIOS - In simple chained promises we had to use request() inside promise. Request returns resolve if successful and reject if error
+// We had to wrap request() inside promise, as request does not support promises. A better way to do this is using axios that support promises itself
 
-geocode.geocodeAddress(argv.a).then((results) => {
-    console.log(`Address: ${results.address}`);
-    return forecast.getWeather(results.latitude, results.longitude)
-}).then((weatherResults) => {
-    console.log(`It's currently ${weatherResults.temperature} Fahrenheit. It feels like ${weatherResults.apparentTemperature} Fahrenheit`);
-}).catch((errorMessage) => {
-    console.log(errorMessage);
-}); 
+var encodedAddress = encodeURIComponent(argv.a);
+var secretKey = fs.readFileSync('./geocode/secret-key.txt', 'utf-8');
+var geocodeUrl = `http://www.mapquestapi.com/geocoding/v1/address?key=${secretKey}&location=${encodedAddress}`;
+            
+axios.get(geocodeUrl).then((response) => { // axios.get() performs get request on geocodeUrl and fetches the get request response json which is saved in response
+    console.log(response.data);
+}).catch((error) => {
+    // console.log(error); // Error when the api server fails
+    if(error.code === 'ENOTFOUND') {
+        console.log('Unable to connect to API servers');
+    }  
+});

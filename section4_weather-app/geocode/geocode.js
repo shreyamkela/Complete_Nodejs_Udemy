@@ -6,6 +6,8 @@ const fs = require('fs');
 
 
 //USING PROMISES - request() inside promise. Once request returns resolve if successful and reject if error
+// Here we have to wrap request() inside promise, as request does not support promises. A better way to do this is using axios that support promises themselves
+
 var geocodeAddress = (address) => {
     return new Promise((resolve, reject) => {
         var encodedAddress = encodeURIComponent(address);
