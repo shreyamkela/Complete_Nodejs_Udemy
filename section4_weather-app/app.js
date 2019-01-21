@@ -16,6 +16,14 @@ const argv = yargs
     .argv; // .argv stores all the options into the var used for this yargs which in this case is 'argv'
 
 
+var FtoCconvertor = (ftemp) => { // Fahrenheit to Centigrade - Mapquest API return Fahrenheit temperature
+    ctemp = (5/9)*(ftemp-32);
+    // console.log(ctemp);
+    ctemp = ctemp.toFixed(2); // round off to 2 decimal places
+    return ctemp;
+}
+
+
 //USING AXIOS - In simple chained promises we had to use request() inside promise. Request returns resolve if successful and reject if error
 // We had to wrap request() inside promise, as request does not support promises. A better way to do this is using axios that support promises itself
 
@@ -43,7 +51,8 @@ axios.get(geocodeUrl).then((response) => { // axios.get() performs get request o
     // No need to check for errors as here, the data/code returned would be valid as geo code was valid and therefore lat lng was valid and therefore there would be a valid temperature. If there is not, then it is a problem on the dasksky API side, and not on our side
     var temperature = response.data.currently.temperature;
     var apparentTemperature = response.data.currently.apparentTemperature;
-    console.log(`It's currently ${temperature} Fahrenheit. It feels like ${apparentTemperature} Fahrenheit`);
+    // console.log(`It's currently ${temperature} Fahrenheit. It feels like ${apparentTemperature} Fahrenheit`);
+    console.log(`It's currently ${FtoCconvertor(temperature)} Fahrenheit. It feels like ${FtoCconvertor(apparentTemperature)} Fahrenheit`);
 }).catch((error) => {
     // console.log(error); // Error when the api server fails or error when address entered is invalid. All types of errors can be caught into this catch() when 'throw new error' (for axios, which is similar to reject() in promises)  is used inside then().
     if(error.code === 'ENOTFOUND') {
