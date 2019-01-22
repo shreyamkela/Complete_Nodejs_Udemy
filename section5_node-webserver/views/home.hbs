@@ -7,9 +7,12 @@
         <title>Some website</title> <!--Title of the tab on chrome-->
     </head> 
     <body>
-        {{> header}}
-
+        {{> header}} <!--Header partial-->
+        
+        <!--
         <p>{{welcomeMessage}}</p>
+        -->
+        <p>{{screamIt welcomeMessage}}</p> <!--screamIt is the helper function and welcomeMessage is the argument passed to it. We can also pass two arguments if screamIt was designed to take in two arguments - {{screamIt welcomeMessage someArgument}} -->
 
         {{> footer}} <!--This is a footer.hbs partial template that has been registered on the path views/partials-->
     </body>
