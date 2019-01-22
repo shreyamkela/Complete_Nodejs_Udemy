@@ -29,7 +29,7 @@ app.get('/bad', (req, res) => {
     });
 });
 
-
+hbs.registerPartials(__dirname + '/views/partials'); // Registering an hbs partial is basically a code snippet that you can automatically copy paste wherever you want to use it by just typing the partial, without the need of typing out this snippet everywhere you want to use that snippet. Changes in hbs would not be monitered by nodemon therefore to apply changes in nodemon whenever you update hbs then use nodemon server.js -e js,hbs. -e tell nodemon to watch only/all js and hbs files for changes. -e is extension
 app.set('view engine', 'hbs'); // The 2 args inside set are a key value pair. Set various express related config. Here we are specifying that the view exngine for express that we are using is hbs. We can also set it as html for html view engine. The default directory that express uses to look for templates is 'views'. Therefore we save our templates in the views folder
 // app.use(express.static(__dirname + '/public')); this method is not used when we are using hbs view engines
 
