@@ -6,7 +6,15 @@ var app = express(); // make an app/application server that handles requests
 
 hbs.registerPartials(__dirname + '/views/partials'); // Registering an hbs partial is basically a code snippet that you can automatically copy paste wherever you want to use it by just typing the partial, without the need of typing out this snippet everywhere you want to use that snippet. Changes in hbs would not be monitered by nodemon therefore to apply changes in nodemon whenever you update hbs then use nodemon server.js -e js,hbs. -e tell nodemon to watch only/all js and hbs files for changes. -e is extension
 app.set('view engine', 'hbs'); // The 2 args inside set are a key value pair. Set various express related config. Here we are specifying that the view exngine for express that we are using is hbs. We can also set it as html for html view engine. The default directory that express uses to look for templates is 'views'. Therefore we save our templates in the views folder
-// app.use(express.static(__dirname + '/public')); this method is not used when we are using hbs view engines
+// app.use(express.static(__dirname + '/public')); // This is express middleware. This method is not used when we are using hbs view engines
+// app.use() can be used to register your own middleware. Middleware can be setup in such a way that it checks the access privilege before it actually accesses that specific path/route. This is just one use case of custom express middleware
+
+app.use((req, res, next) => { //Regeistering your custom express middleware. next specifies what to do when this middleware call completes. Using this we can chain different middlewares. This is async operation so next has to be called otherwise the app handlers for requests will never fire and app pauses till next is called. This middleware moniters all of the requests to our server and therefore if next is not used, our server will not respond to any request
+    var now = new Date().toString(); // To log date and time when server is pinged
+    console.log(`${now}: ${req.method} ${req.url}`); // Logger - Logs whenever our server is pinged for any kind of requests. req.method is the kind of request made by the user, i.e GET, POST, etc. req.url is the url that the user visited/pinged
+    next();
+});
+
 
 // registerPartials registers partial html/hbs snippets that can be injected into other html/hbs files. To inject dynamiclogic content into html/hbs we register helper functions for our use. Helpers can be used outside as well as inside of partials. As both partials and helpers use mustaches {{}}, for every {{somePartialOrHelper}} handlebars first checks whether somePartialOrHelper is a partial, if not then it checks whether it is a helper, if not then it checks if there is some data with the name somePartialOrHelper
 hbs.registerHelper('getCurrentYear', () => {
