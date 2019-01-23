@@ -4,7 +4,7 @@ const fs = require('fs')
 
 const port = process.env.PORT || 3000; // Config the environment cariable to heroku port or the port 3000. So we can run the app on heroku as well as our local host. Heroku will keep changing the env variable therefore we cannot keep maually changing them. process.env.PORT does this automatically when we link our app with heroku. Use "SET" in cmd in windows to see all env variable key value pairs
 // Add "start": "node server.js" in scripts in package.json
-// Now we can use "npm start" to start our web ap without specifying which file the server is
+// Now we can use "npm start" to start our web ap without specifying which file the server is. Just navigate to the subfolder where this particular package.json is and run npm start from here
 // "npm start" runs an arbitrary command specified in the package’s "start" property of its "scripts" object. If no "start" property is specified on the "scripts" object, it will run node server.js - from npm start documentation
 // We can directly run any key inside scripts of package.json by just doing "npm <key_name>" 
 
@@ -54,7 +54,7 @@ hbs.registerHelper('screamIt', (text) => { // screamIt helper converts the text 
 app.get('/', (req, res) => { // / is the root or landing page/route of your application/website. Here we are defining what happens when user visits the '/' page. req defines all the data/flags etc the user has sent i.e req can be set by the user input and then by analysis req we can determine what to send back. res is the response we send back
     res.render('home.hbs', {
         pageTitle: 'Home Page',
-        welcomeMessage: 'Welcome to my website!',
+        welcomeMessage: 'Welcome to my website!'
         // currentYear: new Date().getFullYear() // Instead of passing logic as outside of hbs as done here, we can also pass/run functions or logic directly from inside hbs by using hbs helper functions that serve dynamic content
     });
 
@@ -73,6 +73,13 @@ app.get('/about', (req, res) => { // '/' 'about' and so on are different handler
 app.get('/bad', (req, res) => {
     res.send({
         errorMessage: 'Unable to fulfill request'
+    });
+});
+
+app.get('/projects', (req, res) => { // Portfolio page
+    res.render('projects.hbs', {
+        pageTitle: 'Portfolio Page',
+        message: 'New projects incoming!'
     });
 });
 

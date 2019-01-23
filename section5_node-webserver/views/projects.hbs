@@ -7,9 +7,9 @@
         <title>Some website</title> <!--Title of the tab on chrome-->
     </head> 
     <body>
-        {{> header}}
-
-        <p>This is the about page.</p>
+        {{> header}} <!--Header partial-->
+        
+        <p>{{message}}</p> 
 
         {{> footer}} <!--This is a footer.hbs partial template that has been registered on the path views/partials-->
     </body>
