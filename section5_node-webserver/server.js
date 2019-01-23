@@ -2,7 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs')
 
-const port = process.env.PORT || 3000; // Config the environment cariable to heroku port or the port 3000. So we can run the app on heroku as well as our local host. Heroku will keep changing the env variable therefore we cannot keep maually changing them. process.env.PORT does this automatically when we link our app with heroku
+const port = process.env.PORT || 3000; // Config the environment cariable to heroku port or the port 3000. So we can run the app on heroku as well as our local host. Heroku will keep changing the env variable therefore we cannot keep maually changing them. process.env.PORT does this automatically when we link our app with heroku. Use "SET" in cmd in windows to see all env variable key value pairs
 // Add "start": "node server.js" in scripts in package.json
 // Now we can use "npm start" to start our web ap without specifying which file the server is
 // "npm start" runs an arbitrary command specified in the package’s "start" property of its "scripts" object. If no "start" property is specified on the "scripts" object, it will run node server.js - from npm start documentation
