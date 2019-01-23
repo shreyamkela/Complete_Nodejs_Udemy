@@ -2,6 +2,13 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs')
 
+const port = process.env.PORT || 3000; // Config the environment cariable to heroku port or the port 3000. So we can run the app on heroku as well as our local host. Heroku will keep changing the env variable therefore we cannot keep maually changing them. process.env.PORT does this automatically when we link our app with heroku
+// Add "start": "node server.js" in scripts in package.json
+// Now we can use "npm start" to start our web ap without specifying which file the server is
+// "npm start" runs an arbitrary command specified in the package’s "start" property of its "scripts" object. If no "start" property is specified on the "scripts" object, it will run node server.js - from npm start documentation
+// We can directly run any key inside scripts of package.json by just doing "npm <key_name>" 
+
+
 var app = express(); // make an app/application server that handles requests
 
 
@@ -71,6 +78,7 @@ app.get('/bad', (req, res) => {
 
 // To let the application listen/start at a particular port number:
 // app.listen(3000);
-app.listen(3000, () => { // We can also pass a function as the second argument to listen
-    console.log('Server is up on port 3000');
+app.listen(port, () => { // We can also pass a function as the second argument to listen. Listen to port=3000 or heroku
+    // console.log('Server is up on port 3000');
+    console.log(`Server is up on port ${port}`);
 });
