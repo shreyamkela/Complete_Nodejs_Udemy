@@ -5,8 +5,16 @@ const utils = require('./utils'); // utils.js
 // "npm test" inside this subtree will directly run mocha testing
 it('should add two numbers', () => { // 'it' is a mocha function which defines what the output of the test cases should be. This can be read as 'It should add two numbers'. This is BDD or behaviour driven development. The first arg is a test string
     var res = utils.add(33,11);
-
+   
     if (res !== 44) {
         throw new Error(`Expected 44, but got ${res}`);
+    }
+}); 
+
+it('should square a number', () => { 
+    var res = utils.square(6);
+    
+    if (res !== 36) {
+        throw new Error(`Expected 36, but got ${res}`);
     }
 }); 
