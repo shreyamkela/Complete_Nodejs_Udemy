@@ -1,0 +1,16 @@
+<!--Copy pasted the boilerplate html from public/help.html-->
+<!DOCTYPE html>
+<html> 
+    <head>
+        <!--Setting up the charset so that browser knows how to render our webpage-->
+        <meta charset='utf-8'>
+        <title>Some website</title> <!--Title of the tab on chrome-->
+    </head> 
+    <body>
+        {{> header}} <!--Header partial-->
+        
+        <p>{{message}}</p> 
+
+        {{> footer}} <!--This is a footer.hbs partial template that has been registered on the path views/partials-->
+    </body>
+</html>  

@@ -31,7 +31,7 @@ app.use((req, res, next) => { //Registering your custom express middleware. next
 });
 
 
-// MAINTAINANCE MIDDLEWARE - Can be commented out when the website is not under maintainance
+// MAINTAINANCE EXPRESS MIDDLEWARE - Can be commented out when the website is not under maintainance
 // app.use((req, res, next) => {  
 //     res.render('maintainance.hbs');
 //     // next(); // As next is not called here, no handler executes after this so pinging any of the handlers will cal maintainance.hbs only. Thus with this simple call we can render all pages to a maintainance page, when the site is being updated
@@ -39,7 +39,7 @@ app.use((req, res, next) => { //Registering your custom express middleware. next
 //     // Therefore include public call only after maintanance call
 // });
 
-app.use(express.static(__dirname + '/public')); // Public folder call. This is express middleware
+app.use(express.static(__dirname + '/public')); // Public folder call. This is express middleware. It deals public static files. Put this after maintanance express middleware
 
 
 // registerPartials registers partial html/hbs snippets that can be injected into other html/hbs files. To inject dynamiclogic content into html/hbs we register helper functions for our use. Helpers can be used outside as well as inside of partials. As both partials and helpers use mustaches {{}}, for every {{somePartialOrHelper}} handlebars first checks whether somePartialOrHelper is a partial, if not then it checks whether it is a helper, if not then it checks if there is some data with the name somePartialOrHelper
@@ -82,6 +82,16 @@ app.get('/projects', (req, res) => { // Portfolio page
         message: 'New projects incoming!'
     });
 });
+
+
+//The 404 Route (ALWAYS KEEP THIS AS THE LAST ROUTE AS NODE WILL READ THE CODE SEQUENTIALLY. So if you keep the 404 route up, then the handles served below it will still give 404 even if they were called)
+app.get('*', function(req, res){
+    // res.send('The page does not exist.', 404); // Can use this but if we want to show a back or home button here, we can add it by usin res.render but we cannot use res.render when res.send has been used. For home button with res.send we would have to include html and href in the res.send
+    res.render('bad_page.hbs', {
+        pageTitle: 'Bad Page',
+        message: 'The page does not exist'
+    });
+  });
 
 // To let the application listen/start at a particular port number:
 // app.listen(3000);
