@@ -9,6 +9,6 @@ app.js is app.js for Lec 38+ (and above)
 geocode_no_promises is geocode.js till lecture 37
 geocode.js is geocode.js for lecture 37 second half
 forecast_no_promises is forecast.js till lecture 37
-forecast.js is forecast.js for lecture 37 second half
+forecast.js is forecast.js for lecture 37 second half+
 
 forecast folder is weather folder from the videos
