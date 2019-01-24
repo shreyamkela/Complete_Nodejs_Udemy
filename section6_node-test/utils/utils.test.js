@@ -80,8 +80,15 @@ it('should verify whether first and last names are set as expected or not', () =
 //     });
 // }); 
 it('should async add two numbers', (done) => { // when doen arg is passed, mocha knows it is an async function and it has to run till this arg is called
-    utils.asyncAdd(4, 3, (sum) => { // In the callback function of asyncAdd, we assert
+    utils.asyncAdd(4, 3, (sum) => { // In the callback function of asyncAdd, we assert. The sum variable stores the result, calback is passed in place of sum in utils.js asyncAdd function i.e where asyncAdd is defined
         expect(sum).toBe(7).toBeA('number'); 
         done(); // Calling done after the expect makes mocha run till done is called
     }); // When printing the test results, mocha will coulour the time taken as red if it is anywhere close to a second or more. No async request in real-world apps takes that long, therefore mocha thinks it's a problem
+}); 
+
+it('should async square a number', (done) => { 
+    utils.asyncSquare(7, (square) => { 
+        expect(square).toBe(49).toBeA('number'); 
+        done(); // If done is passed into callback but never called here, this also gives an error as mocha thinks that the async call never finished and exceeded the 2000ms mocha limit. Therefore it throws an error
+    }); 
 }); 
