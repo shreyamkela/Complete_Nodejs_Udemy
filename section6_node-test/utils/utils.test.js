@@ -57,3 +57,18 @@ it('should expect to include/exclude some values', () => {
         age: 24
     });
 }); 
+
+it('should verify whether first and last names are set as expected or not', () => { 
+    var user = {
+        age: 25,
+        location: 'San Jose'
+    };
+    var res = utils.setName(user, 'Shreyam Kela');
+    // JavaScript passes objects by reference, therefore res is updated to be equal to user when setName returns
+    // expect(user).toBe(res); // This does not throw an error which proves our point
+
+    expect(res).toInclude({
+        firstName: 'Shreyam',
+        lastName: 'Kela'
+    }).toBeA('object');
+}); 
