@@ -10,3 +10,9 @@ module.exports.setName = (user, fullName) => { // To test for first name and las
     // console.log(user);
     return user;
 };
+
+module.exports.asyncAdd = (a, b, callback) => { // An async add func to test for async adding of 2 numbers
+    setTimeout(() => {
+        callback(a + b);
+    }, 1000); // With mocha delay should be below 2000ms as if it is over 2000, mocha thinks there is an error and throws an error
+}; 

@@ -72,3 +72,16 @@ it('should verify whether first and last names are set as expected or not', () =
         lastName: 'Kela'
     }).toBeA('object');
 }); 
+
+// TESTING ASYNC WITH MOCHA
+// it('should async add two numbers', () => { // If no arg is included in the callback of it, mocha is not going to go till the expect assertion. It will print pass before as soon as the callback is called, and not wait for the async delay thus and not go to the expect assert as mocha thinks that when callback is fired, everything went fine. It does not wait for the async delay, as this only checks whether there is a callback function with a delay, which is present as we have it defined in utils.js as asyncAdd. This is a problem with async testing with mocha. To check for this we pass an argument to callback of it and at the end of expect assertion we call it, which will make mocha run till the arg is called. This will make mocha test the expect assertion that we use, and not test just whether a async action func is present or not. We need to tell mocha that it is an async function that will take time to generate an output that we need to test. Refer 'Testing Async code' of the udemy tutorial - Sec 6, Lec 54. See the next code snippet
+//     utils.asyncAdd(4, 3, (sum) => { // In the callback function of asyncAdd, we assert
+//         expect(sum).toBe(8).toBeA('number'); 
+//     });
+// }); 
+it('should async add two numbers', (done) => { // when doen arg is passed, mocha knows it is an async function and it has to run till this arg is called
+    utils.asyncAdd(4, 3, (sum) => { // In the callback function of asyncAdd, we assert
+        expect(sum).toBe(7).toBeA('number'); 
+        done(); // Calling done after the expect makes mocha run till done is called
+    }); // When printing the test results, mocha will coulour the time taken as red if it is anywhere close to a second or more. No async request in real-world apps takes that long, therefore mocha thinks it's a problem
+}); 
