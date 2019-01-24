@@ -9,7 +9,7 @@ const utils = require('./utils'); // utils.js
 // Use "npm run test-watch" to run the script
 
 
-describe('Utils', () => { // Combines all the tests described inside, under a heading 'Utils'. Functionality of Mocha. To make the test results more readable
+describe('Utils', () => { // Combines all the tests described inside, under a heading 'Utils'. Functionality of Mocha. To make the test results more readable. It wraps up tests under blocks
 
     it('should add two numbers', () => { // 'it' is a mocha function which defines what the output of the test cases should be. This can be read as 'It should add two numbers'. This is BDD or behaviour driven development. The first arg is a test string
         var res = utils.add(33,11);
