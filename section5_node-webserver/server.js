@@ -84,11 +84,11 @@ app.get('/projects', (req, res) => { // Portfolio page
 });
 
 
-//The 404 Route (ALWAYS KEEP THIS AS THE LAST ROUTE AS NODE WILL READ THE CODE SEQUENTIALLY. So if you keep the 404 route up, then the handles served below it will still give 404 even if they were called)
+//The 404 Route - Page does not exist (ALWAYS KEEP THIS AS THE LAST ROUTE AS NODE WILL READ THE CODE SEQUENTIALLY. So if you keep the 404 route up, then the handles served below it will still give 404 even if they were called)
 app.get('*', function(req, res){
     // res.send('The page does not exist.', 404); // Can use this but if we want to show a back or home button here, we can add it by usin res.render but we cannot use res.render when res.send has been used. For home button with res.send we would have to include html and href in the res.send
     res.render('bad_page.hbs', {
-        pageTitle: 'Bad Page',
+        pageTitle: 'Bad Page', // These are the options we are passing to the bad_page.hbs template
         message: 'The page does not exist'
     });
   });
